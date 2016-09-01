@@ -3,6 +3,7 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+<<<<<<< HEAD
   div.registerFormWrapper
     button.openRegisterForm= "Sign Up!" 
     .registerForm(style="display:none;")
@@ -14,3 +15,15 @@ block content
       input.passwordCheck(placeholder='Password confirmation')
       button.register= "Register!"
     script(src="/javascripts/index.js")
+=======
+  div.row
+    div.twelve.columns 
+      p some stuff
+  div.row
+    div.four.columns
+    p stuff
+    div.four.columns
+    p stuff
+    div.four.columns
+    p stuff
+>>>>>>> james

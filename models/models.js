@@ -20,25 +20,31 @@ sequelize
     console.log('Unable to connect to the database:', err);
   });
 
-//application-wide models - note: you must have corresponding fields in your 'bookstore' database to avoid errors
+//application-wide models - note: you must have corresponding fields in your 'expresscode' database to avoid errors
 var User = sequelize.define('user', {
   userName: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: true
   },
   firstName: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false
   },
   lastName: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false
   },
   email: {
     type: Sequelize.STRING,
+    allowNull: false,
     validate: {
       isEmail: true,
     }
   },
   password: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false
   }
 });
 
@@ -64,8 +70,7 @@ var Comment = sequelize.define('comment', {
 });
 
 //For future reference:
-  //This will create a new model called UserDocument with the equivalent foreign keys 
-  //documentID and userID
+  //This will create a new model called UserDocument with the equivalent foreign keys documentID and userID
 
 // Document.belongstoMany(User, {through: 'UserDocument'});
 // User.belongstoMany(Document, {through: 'UserDocument'});

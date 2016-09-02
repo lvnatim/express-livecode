@@ -2,9 +2,9 @@
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define('User', {
     username: DataTypes.STRING,
-    email: DataTypes.STRING,
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
+    email: DataTypes.STRING,
     password: DataTypes.STRING
   }, {
     classMethods: {
@@ -14,14 +14,13 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
   //will add new user to database on connect
-//   User.sync({force: true}).then(function(){
-//   User.create({
-//     email: 'john@doe.com',
-//     firstName: 'John',
-//     lastName: 'Doe',
-//     password: '123456'
-//   })
-// })
+  //   User.sync({force: true}).then(function(){
+  //   User.create({
+  //     email: 'john@doe.com',
+  //     firstName: 'John',
+  //     lastName: 'Doe',
+  //     password: '123456'
+  //   })
+  // })
   return User;
 };
-

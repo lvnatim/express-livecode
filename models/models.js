@@ -1,7 +1,7 @@
 //Sequelize set up and connection 
 var Sequelize = require('sequelize');
 
-var sequelize = new Sequelize('bookstore', 'development', 'development', {
+var sequelize = new Sequelize('expresscode', 'development', 'development', {
   host: 'localhost',
   dialect: 'postgres',
   pool: {
@@ -20,7 +20,7 @@ sequelize
     console.log('Unable to connect to the database:', err);
   });
 
-//application-wide models
+//application-wide models - note: you must have corresponding fields in your 'bookstore' database to avoid errors
 var User = sequelize.define('user', {
   userName: {
     type: Sequelize.STRING
@@ -43,15 +43,15 @@ var User = sequelize.define('user', {
 });
 
 var Document = sequelize.define('document', {
-  // name: {
-  //   type: Sequelize.STRING
-  // },
+  name: {
+    type: Sequelize.STRING
+  },
   content: {
     type: Sequelize.STRING
   },
-  // owner_id: {
-  //   type: Sequelize.INTEGER
-  // },
+  owner_id: {
+    type: Sequelize.INTEGER
+  },
   language: {
     type: Sequelize.STRING
   }
@@ -66,7 +66,7 @@ var Comment = sequelize.define('comment', {
 //For future reference:
   //This will create a new model called UserDocument with the equivalent foreign keys 
   //documentID and userID
-  
+
 // Document.belongstoMany(User, {through: 'UserDocument'});
 // User.belongstoMany(Document, {through: 'UserDocument'});
 // Comment.belongsto(Document);

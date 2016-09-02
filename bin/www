@@ -21,6 +21,22 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
+// LiveCode source code, the meat and bones:
+// TODO: move this into another file
+
+var io = require('socket.io')(server);
+
+io.on('connection', function(socket){
+  console.log("Someone connected!");
+  socket.emit('connect');
+  socket.on('init', function(data){
+    console.log(data);
+  });
+  socket.on('edit', function(data){
+    console.log(data);
+  });
+});
+
 /**
  * Listen on provided port, on all network interfaces.
  */

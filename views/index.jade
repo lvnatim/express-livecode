@@ -1,17 +1,45 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  div.registerFormWrapper
-    button.openRegisterForm= "Sign Up!" 
-    .registerForm(style="display:none;")
-      input.username(placeholder='Username')
-      input.firstname(placeholder='First name')
-      input.lastname(placeholder='Last name')
-      input.email(placeholder='Email')
-      input.password(placeholder='Password')
-      input.passwordCheck(placeholder='Password confirmation')
-      button.register= "Register!"
-    script(src="/javascripts/index.js")
+  div.row
+    div.one.column
+      div.registerFormWrapper
+        button.openRegisterForm= "Sign Up!" 
+        .registerForm(style="display:none;")
+          input.username(placeholder='Username')
+          input.firstname(placeholder='First name')
+          input.lastname(placeholder='Last name')
+          input.email(placeholder='Email')
+          input.password(placeholder='Password')
+          input.passwordCheck(placeholder='Password confirmation')
+          button.register= "Register!"
+    div.nine.columns
+      p Live-Code
+    div.one.column
+      button username
+    div.one.column
+      button login
+  div.row
+    div.twelve.columns
+      div.background
+  div.container  
+    div.row
+      div.four.columns
+        img(src='https://www.eimacs.com/blog/wp-content/uploads/2011/09/Computer-Code.jpg')
+      div.four.columns
+        img(src='https://www.eimacs.com/blog/wp-content/uploads/2011/09/Computer-Code.jpg')
+      div.four.columns
+        img(src='https://www.eimacs.com/blog/wp-content/uploads/2011/09/Computer-Code.jpg')
+    div.row
+      div.four.columns
+        img(src='https://www.eimacs.com/blog/wp-content/uploads/2011/09/Computer-Code.jpg')
+      div.four.columns
+        img(src='https://www.eimacs.com/blog/wp-content/uploads/2011/09/Computer-Code.jpg')
+      div.four.columns
+        img(src='https://www.eimacs.com/blog/wp-content/uploads/2011/09/Computer-Code.jpg')
+  div.row
+    div.twelve.columns
+      p footer
+
+  script(src="/javascripts/index.js")
 

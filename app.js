@@ -8,9 +8,12 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var livecode = require('./routes/livecode');
+var db = require('./models/index')
 
 var app = express();
-var sequelize = require('./models/models');
+
+
+
 
 
 

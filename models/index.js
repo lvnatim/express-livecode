@@ -10,9 +10,19 @@ var db        = {};
 
 if (config.use_env_variable) {
   var sequelize = new Sequelize(process.env[config.use_env_variable]);
+  
 } else {
   var sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
+
+//Generates console log when first connecting to db
+sequelize
+  .authenticate()
+  .then(function(err){
+    console.log('Connection to postgres db successful');
+  }, function(err) {
+    console.log('Failed to connect to database:', err);
+  })
 
 fs
   .readdirSync(__dirname)
@@ -33,4 +43,4 @@ Object.keys(db).forEach(function(modelName) {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-module.exports = db;
+module.exports = db; //db.sequelize can be used to run raw queries

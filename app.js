@@ -10,6 +10,9 @@ var users = require('./routes/users');
 var livecode = require('./routes/livecode');
 
 var app = express();
+var sequelize = require('./models/models');
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

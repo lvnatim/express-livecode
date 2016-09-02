@@ -6,13 +6,19 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var api = require('./routes/api');
 var livecode = require('./routes/livecode');
 
 var app = express();
-var sequelize = require('./models/models');
+var session = require('express-session');
 
-
+// session setup
+app.use(session({
+  secret: 'lighthouse labs',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}))
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,7 +33,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/api', api);
 app.use('/livecode', livecode);
 
 

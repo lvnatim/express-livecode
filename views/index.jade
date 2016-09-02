@@ -10,7 +10,14 @@ block content
       input.firstname(placeholder='First name')
       input.lastname(placeholder='Last name')
       input.email(placeholder='Email')
-      input.password(placeholder='Password')
-      input.passwordCheck(placeholder='Password confirmation')
+      input.password(type='password' placeholder='Password')
+      input.passwordCheck(type='password' placeholder='Password confirmation')
       button.register= "Register!"
     script(src="/javascripts/index.js")
+
+  div.loginFormWrapper
+    button.openLoginForm= "Log In!" 
+    .loginForm(style="display:none;")
+      input.loginUsername(placeholder='Username')
+      input.loginPassword(type='password' placeholder='Password')
+      button.login= "Login!"

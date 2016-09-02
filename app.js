@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var livecode = require('./routes/livecode');
 
 var app = express();
 var sequelize = require('./models/models');
@@ -27,6 +28,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/livecode', livecode);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

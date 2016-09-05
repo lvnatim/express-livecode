@@ -8,9 +8,17 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        Document.hasMany(models.Comment)
+        Document.belongsToMany(models.User, 
+          {
+            through: {
+              model: 'UserDocuments'
+            },
+            foreignKey: 'docID'
+          });
       }
     }
   });
+  sequelize.sync();
   return Document;
 };

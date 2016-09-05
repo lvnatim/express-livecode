@@ -9,18 +9,16 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        User.hasMany(models.Comment)
+        User.belongsToMany(models.Document, {
+          through: {
+            model: 'UserDocuments'
+            },
+            foreignKey: 'userID'
+            });
       }
-    }
+    }  
   });
-  //will add new user to database on connect
-  //   User.sync({force: true}).then(function(){
-  //   User.create({
-  //     email: 'john@doe.com',
-  //     firstName: 'John',
-  //     lastName: 'Doe',
-  //     password: '123456'
-  //   })
-  // })
+  sequelize.sync();
   return User;
 };

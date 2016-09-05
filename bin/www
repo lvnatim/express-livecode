@@ -4,9 +4,13 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+var app = require('../app').app;
+var session = require('../app').session;
+var sharedsession = require("express-socket.io-session");
+
 var debug = require('debug')('express-app:server');
 var http = require('http');
+var db = require("../models/index");
 
 /**
  * Get port from environment and store in Express.
@@ -21,20 +25,41 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
-// LiveCode source code, the meat and bones:
-// TODO: move this into another file
+var io = require("socket.io")(server);
+io.use(sharedsession(session));
 
-var io = require('socket.io')(server);
+io.on("connection", function(socket) {
 
-io.on('connection', function(socket){
-  console.log("Someone connected!");
-  socket.emit('connect');
-  socket.on('init', function(data){
-    console.log(data);
-  });
-  socket.on('edit', function(data){
-    console.log(data);
-  });
+    console.log(socket.handshake.session);
+
+    socket.on('JOIN', function(documentId){
+      var user_id = socket.handshake.session.user_id
+      db.Document.findById(documentId)
+        .then(function(doc){
+          if(doc && doc.owned_id === user_id){
+            socket.join(documentId.toString());
+            console.log("User join read/write for room", documentId);
+          } else {
+            socket.join("VIEWONLY"+documentId);
+            socket.emit("STOP");
+            console.log("User joined read only for room", documentId);
+          };
+        });
+    });
+
+    socket.on('EDIT',function(data){
+      var room = data.room
+      var viewOnlyRoom = "VIEWONLY" + data.room
+      socket.broadcast.to(data.room).emit('EDIT', data.event);
+      io.to(viewOnlyRoom).emit('EDIT', data.event);
+    })
+
+    socket.on("logout", function(userdata) {
+        if (socket.handshake.session.userdata) {
+            delete socket.handshake.session.userdata;
+        }
+    });   
+
 });
 
 /**

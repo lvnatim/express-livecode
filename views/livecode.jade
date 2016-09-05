@@ -1,7 +1,8 @@
 extends layout
 
 block content
-  div#editor
+  div#editor= content
+  button.save="Save Document!"
   script(src="https://cdn.socket.io/socket.io-1.4.5.js")
   script(src="/plugins/ace-builds-master/src/ace.js")
   script(src="/javascripts/livecode.js")

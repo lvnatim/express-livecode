@@ -42,8 +42,4 @@ router.post('/logout', function(req,res,next){
   req.session.user_id = null;
 });
 
-// router.post('/', function(req, res, next) {
-//   console.log(db.User.findAll());
-// });
-
 module.exports = router;

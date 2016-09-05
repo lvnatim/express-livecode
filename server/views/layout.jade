@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title= "LiveCode!"
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css")
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css")
+    script(type='text/javascript' src="/javascripts/jquery-3.1.0.js")
+
+  body
+    div#react-root
+    block content
+    script(type='text/javascript' src='//localhost:8080/build/bundle.js')
+

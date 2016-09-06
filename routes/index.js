@@ -18,6 +18,7 @@ router.get('/profile', function(req, res, next) {
             user
             .getDocuments()
             .then(function(docs){
+              console.log(docs);
               res.render('profile', {docs: docs});
             })
           }

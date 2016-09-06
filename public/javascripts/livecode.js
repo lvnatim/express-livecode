@@ -77,8 +77,6 @@ socket.on('RELOAD', function(data){
   });
 });
 
-// --------------------------------------------------------------------------
-
 $('.save').on('click', function(){
   var content = editor.getValue();
   $.ajax({
@@ -89,4 +87,15 @@ $('.save').on('click', function(){
     error: function(){console.log("Failed to save!")}
   });
 })
+
+$('input.userSearch').on('keyup',function(e){
+  var value = $(this).val() + '%';
+  $.ajax({
+    url: '/api/profiles',
+    method: 'get',
+    data: {username: value},
+    success: function(data){console.log(data)},
+    error: function(){console.log("404 error")}
+  });
+});
 

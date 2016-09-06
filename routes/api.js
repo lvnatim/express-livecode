@@ -10,6 +10,26 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+router.get('/profiles', function(req,res,next){
+  db.User
+    .findAll({
+      attributes: ["id", "username", "firstName", "lastName"], 
+      where:{
+        username: {
+          $like: req.query.username
+        }
+      },
+      limit: 10
+    })
+    .then(function(users){
+      res.send(users);
+    })
+    .catch(function(users){
+      res.sendStatus(404);
+    })
+
+});
+
 router.post('/register', function(req,res,next) {
   db.User
     .build(req.body)

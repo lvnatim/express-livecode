@@ -15,10 +15,18 @@ router.get('/profile', function(req, res, next) {
         .findById(req.session.user_id)
         .then(function(user){
           if(user){
-            console.log(user.getDocuments());
+            user
+            .getDocuments()
+            .then(function(docs){
+              res.render('profile', {docs: docs});
+            })
           }
+        })
+        .catch(function(err){
+          console.log(err);
+          res.render('error');
         });
-      res.render('profile');
+
     } else {
       res.send("you're not allowed to access this page!");
     }

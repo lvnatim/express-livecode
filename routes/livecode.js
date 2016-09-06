@@ -8,19 +8,28 @@ router.get('/new', function(req, res, next){
   if(!req.session.user_id){
     res.redirect('/');
   } else {
-    var doc = db.Document.build({
+    var doc = db.Document.create({
       name: "untitled",
       content: "",
       owned_id: req.session.user_id,
       language: "javascript"
+    })
+    .then(function(doc){
+
+      db.User
+        .findById(req.session.user_id)
+        .then(function(user){
+          user.addDocument(doc);
+        })
+        .catch(function(error){
+          console.log(error);
+        });
+
+      res.redirect('/livecode/' + doc.id);
+    })
+    .catch(function(err){
+      res.redirect('/');
     });
-    doc.save()
-      .then(function(doc){
-        res.redirect('/livecode/' + doc.id);
-      })
-      .catch(function(err){
-        res.redirect('/');
-      });
   }
 });
 

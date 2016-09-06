@@ -5,10 +5,10 @@ var config = require('./webpack.config');
 new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath
   })
-  .listen(8080, '0.0.0.0', function (err, result) {
+  .listen(7777, '0.0.0.0', function (err, result) {
     if (err) {
       console.log(err);
     }
 
-    console.log('Running at http://0.0.0.0:8080');
+    console.log('Running at http://0.0.0.0:7777');
   });

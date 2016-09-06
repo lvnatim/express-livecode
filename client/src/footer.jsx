@@ -4,10 +4,7 @@ class Footer extends Component {
   render() {
     return (
       <footer>
-        <div>
-          <a href="#">username</a>
-          <a href="#">Logout</a>
-        </div>
+        <small><a href="#">username</a> <a href="#">Logout</a></small>
       </footer>
     );
   }

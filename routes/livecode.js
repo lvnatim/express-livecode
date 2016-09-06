@@ -35,13 +35,26 @@ router.get('/:id', function(req, res, next){
   });
 });
 
+router.get('/:id/reload', function(req, res, next){
+  db.Document.findById(req.params.id)
+    .then(function(doc){
+      if(doc){
+        res.send(doc.content);
+      } else {
+        res.sendStatus(404);
+      }
+    });
+});
+
 router.put('/:id', function(req,res,next){
   if(!req.session.user_id){
     res.sendStatus(404);
   } else {
     db.Document.findById(req.params.id)
     .then(function(doc){
-      if(doc){
+      console.log(typeof doc.owned_id);
+      console.log(typeof req.session.user_id);
+      if(doc && doc.owned_id === req.session.user_id){
         doc.content = req.body.content
         doc.save()
           .then(function(doc){

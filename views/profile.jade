@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  table
+    thead
+      tr
+        td= "Name"
+        td= "Language"
+        td= "Date Created"
+        td= "Last Updated"
+    tbody
+      each val in docs
+        tr(data-live-code=val.dataValues.id)
+          td.documentTitle= val.dataValues.name
+          td.documentLanguage= val.dataValues.language
+          td.documentCreatedAt= val.dataValues.createdAt
+          td.documentUpdatedAt= val.dataValues.updatedAt
+          td
+            button(data-live-code=val.dataValues.id)= "LiveCode"
+  script(src="/javascripts/profile.js")

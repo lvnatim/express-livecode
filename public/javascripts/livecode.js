@@ -77,8 +77,6 @@ socket.on('RELOAD', function(data){
   });
 });
 
-// --------------------------------------------------------------------------
-
 $('.save').on('click', function(){
   var content = editor.getValue();
   $.ajax({
@@ -88,5 +86,35 @@ $('.save').on('click', function(){
     success: function(){console.log("Successful save!")},
     error: function(){console.log("Failed to save!")}
   });
+})
+
+$('input.userSearch').on('keyup',function(e){
+  var value = $(this).val() + '%';
+  $.ajax({
+    url: '/api/profiles',
+    method: 'get',
+    data: {username: value},
+    success: function(data){
+      populateSearchForm(data)
+    },
+    error: function(){console.log("404 error")}
+  });
+});
+
+// helper function used in input user search
+
+function populateSearchForm(userArray){
+  $('.foundUsers').empty();
+  userArray.forEach(function(object){
+    $('<li>')
+      .addClass("userButton")
+      .attr("data-user-id", object.id)
+      .text(object.username)
+      .appendTo($('.foundUsers'));
+  });
+}
+
+$('.foundUsers').on('click', '.userbutton', function(e){
+  
 })
 

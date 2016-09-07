@@ -22,11 +22,11 @@ input {
   left: 0;
 }
 
-.save {
+.documentButtons {
+  list-style-type: none;
   float:right;
 }
 
-/*----NAVBAR----*/
 .container {
  margin-top: 50px;
 }
@@ -47,4 +47,21 @@ input {
  
 #nav a:hover {
  text-decoration: underline;
+}
+
+.foundUsers {
+  list-style-type: none;
+  margin-left: 0;
+}
+
+.foundUsers > li {
+  border-radius: 10px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  width: 147px;
+  height: 38px;
+}
+
+.foundUsers > li:hover {
+  background-color: #95d3e6;
 }

@@ -8,30 +8,23 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/profile', function(req, res, next) {
-  if(!req.session.user_id){
-    res.send("you're not allowed to access this page!");
-  } else {
-    if(req.session.user_id){
-      var documents = db.User
-        .findById(req.session.user_id)
-        .then(function(user){
-          if(user){
-            user
-            .getDocuments()
-            .then(function(docs){
-              var username = user.username;
-              res.render('profile', {docs: docs, username:username});
-            })
-          }
-        })
-        .catch(function(err){
-          console.log(err);
-          res.render('error');
+  if(req.session.user_id){
+    var documents = db.User
+      .findById(req.session.user_id)
+      .then(function(user){
+        user
+          .getDocuments()
+          .then(function(docs){
+            var username = user.username;
+            var docs = docs.map(doc => doc.dataValues);
+            res.render('profile', {docs: docs, username:username});
         });
-
-    } else {
-      res.send("you're not allowed to access this page!");
-    }
+      })
+      .catch(function(err){
+        res.render('error');
+    });
+  } else {
+    res.send("you're not allowed to access this page!");
   }
 })
 

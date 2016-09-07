@@ -2,7 +2,18 @@ extends layout
 
 block content
   div#editor= content
-  button.save="Save Document!"
+  ul.documentButtons
+    li.editorList= "Editors"
+      ul
+        each user in editors
+          li= user.username
+    li
+      button="Save Document!"
+    li
+      button="Add Editor!"
+    li
+      input.userSearch(type="text" placeholder="Type in username")
+      ul.foundUsers
   script(src="https://cdn.socket.io/socket.io-1.4.5.js")
   script(src="/plugins/ace-builds-master/src/ace.js")
   script(src="/javascripts/livecode.js")

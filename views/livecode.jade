@@ -5,9 +5,8 @@ block content
   ul.documentButtons
     li.editorList= "Editors"
       ul
-        li="Tim"
-        li="Tim"
-        li="Tim"
+        each user in editors
+          li= user.username
     li
       button="Save Document!"
     li

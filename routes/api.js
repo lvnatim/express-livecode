@@ -27,7 +27,6 @@ router.get('/profiles', function(req,res,next){
     .catch(function(users){
       res.sendStatus(404);
     })
-
 });
 
 router.post('/register', function(req,res,next) {
@@ -63,6 +62,34 @@ router.post('/logout', function(req,res,next){
   req.session.user_id = null;
   req.session.username = null;
   res.sendStatus(200);
+});
+
+router.post('/adduser', function(req, res, next){
+  var documentId = req.body.documentId;
+  var userId = req.body.userId;
+  console.log(documentId);
+  console.log(userId);
+
+  var user = db.User
+    .findById(userId)
+    .then(user => {
+      var doc = db.Document
+        .findById(documentId)
+        .then(doc => {
+          if(doc.owned_id === req.session.user_id){
+            doc.addUser(user);
+            res.sendStatus(200);
+          } else {
+            res.sendStatus(404);
+          }
+        })
+        .catch(err => {
+          res.sendStatus(404);
+        });
+    })
+    .catch(err => {
+      res.sendStatus(404);
+    });
 });
 
 module.exports = router;

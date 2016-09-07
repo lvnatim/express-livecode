@@ -115,6 +115,14 @@ function populateSearchForm(userArray){
 
 $('.foundUsers').on('click', '.userButton', function(e){
   var value = $(this).data("userId");
-  console.log(value);
+  var data = {userId: value, documentId: documentId};
+  $.post({
+    url: '/api/adduser',
+    data: data,
+    success: function(){"successful addition!"},
+    error: function(){"unsuccessful addition"}
+  })
+
+
 })
 

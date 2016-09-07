@@ -60,34 +60,38 @@ router.get('/:id/reload', function(req, res, next){
     });
 });
 
-router.post('/:id/adduser', function(req, res, next){
-  res.sendStatus(200);
-});
-
 router.post('/:id/removeuser', function(req, res, next){
   res.sendStatus(200);
 });
 
 router.put('/:id', function(req,res,next){
-  if(!req.session.user_id){
-    res.sendStatus(404);
-  } else {
-    db.Document.findById(req.params.id)
-    .then(function(doc){
-      if(doc && doc.owned_id === req.session.user_id){
-        doc.content = req.body.content
-        doc.save()
-          .then(function(doc){
-            res.sendStatus(200);
-          })
-          .catch(function(err){
+  db.User.findById(req.session.user_id)
+    .then(user=>{
+      db.Document.findById(req.params.id)
+        .then(function(doc){
+          if(doc.hasUser(user)){
+            doc.content = req.body.content
+            doc.save()
+              .then(function(doc){
+                res.sendStatus(200);
+              })
+              .catch(function(err){
+                res.sendStatus(404);
+              })
+          } else {
             res.sendStatus(404);
-          })
-      } else {
-        res.sendStatus(404);
-      }
-    });
-  }
+          }
+        });
+    })
+    .catch(err=>{
+      res.send(404);
+    })
 });
+
+
+// TODO: Implement a req.session.user_id check function to dry out code
+// function checkUserId(req, callback){
+
+// }
 
 module.exports = router;

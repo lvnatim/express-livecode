@@ -1,4 +1,26 @@
+  //todo: implement socket functionality here to 
+  //populate splash page with randomly selected
+  //live document
+
 $(function(){
+
+  // var editor = ace.edit("editor")
+  // editor.$blockScrolling = Infinity;
+  // editor.setTheme("ace/theme/monokai");
+  // editor.getSession().setMode("ace/mode/javascript");
+
+  // var Range = ace.require("ace/range").Range;
+  // var editSession = editor.getSession();
+
+  // var onlylisten = false;
+ 
+ //namespaced socket
+ var socket = io('/livecode/1');
+ console.log(socket.nsp);
+
+
+
+
   $('.openRegisterForm').on("click", function(){
     $('.registerForm').toggle();
   });

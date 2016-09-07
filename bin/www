@@ -26,6 +26,7 @@ app.set('port', port);
 var server = http.createServer(app);
 
 var io = require("socket.io")(server);
+
 io.use(sharedsession(session));
 
 io.on("connection", function(socket) {
@@ -74,6 +75,16 @@ io.on("connection", function(socket) {
       }
     });
 
+    //namespaced socket for splash page
+    //TODO: randomize id selector
+    
+    // var randomDoc = myArray[Math.floor(Math.random() * myArray.length)];
+
+    var nsp = io.of('/livecode/'+'1';
+    nsp.on('connection', function(socket){
+      console.log('someone connected');
+    });
+    nsp.emit("hi", "everyone!");
 })   
 
 

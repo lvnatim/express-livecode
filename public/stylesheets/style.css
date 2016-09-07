@@ -25,3 +25,15 @@ input {
 .save {
   float:right;
 }
+
+th {
+  color: #2F4F4F;
+}
+
+.highlight {
+  background: #fafafa;
+}
+
+
+
+

@@ -65,3 +65,23 @@ input {
 .foundUsers > li:hover {
   background-color: #95d3e6;
 }
+
+th {
+  color: #2F4F4F;
+}
+
+.highlight {
+  background: #fafafa;
+}
+
+.save {
+  padding: 0px;
+}
+
+.hidden {
+  display: none;
+}
+.show {
+  display: block;
+}
+

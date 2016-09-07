@@ -5,37 +5,29 @@ var db = require("../models/index");
 /* GET users listing. */
 
 router.get('/new', function(req, res, next){
-  if(!req.session.user_id){
-    res.redirect('/');
-  } else {
-    var doc = db.Document.create({
-      name: "untitled",
-      content: "",
-      owned_id: req.session.user_id,
-      language: "javascript"
-    })
-    .then(function(doc){
-
-      db.User
-        .findById(req.session.user_id)
-        .then(function(user){
-          user.addDocument(doc);
+  db.User
+    .findById(req.session.user_id)
+    .then(user=>{
+      if(user){
+        db.Document.create({
+          name: "untitled",
+          content: "",
+          owned_id: req.session.user_id,
+          language: "javascript"
         })
-        .catch(function(error){
-          console.log(error);
+        .then(doc=>{
+          doc.addUser(user);
+          res.redirect('/livecode/' + doc.id);
         });
-
-      res.redirect('/livecode/' + doc.id);
-    })
-    .catch(function(err){
-      res.redirect('/');
+      } else {
+        res.render("error");
+      }
     });
-  }
 });
 
 router.get('/:id', function(req, res, next){
   db.Document.findById(req.params.id)
-    .then(function(doc){
+    .then(doc => {
       var editors = doc.getUsers()
         .then(function(users){
           var users = users.map(user=> user.dataValues);
@@ -46,7 +38,7 @@ router.get('/:id', function(req, res, next){
           });
         });
     })
-    .catch(function(doc){
+    .catch(function(err){
       res.redirect('/');
     });
 });
@@ -61,32 +53,26 @@ router.get('/:id/reload', function(req, res, next){
     });
 });
 
-router.post('/:id/removeuser', function(req, res, next){
-  res.sendStatus(200);
-});
-
 router.put('/:id', function(req,res,next){
   db.User.findById(req.session.user_id)
     .then(user=>{
       db.Document.findById(req.params.id)
-        .then(function(doc){
-          if(doc.hasUser(user)){
-            doc.content = req.body.content
-            doc.save()
-              .then(function(doc){
-                res.sendStatus(200);
-              })
-              .catch(function(err){
+        .then(doc=> {
+          doc.hasUser(user)
+            .then(result=>{
+              if(result){              
+                doc.content = req.body.content;
+                doc.save()
+                .then(function(doc){
+                  res.sendStatus(200);
+                });
+              } else {
+                console.log("result is false!");
                 res.sendStatus(404);
-              })
-          } else {
-            res.sendStatus(404);
-          }
+              }
+            });
         });
-    })
-    .catch(err=>{
-      res.send(404);
-    })
+    });
 });
 
 

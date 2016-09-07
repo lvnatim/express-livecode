@@ -30,6 +30,7 @@ router.post('/login', function(req,res,next){
     .then(function(user){
       if(user){
         req.session.user_id = user.id;
+        req.session.username = user.username;
         console.log(user.username, "has logged in!");
         res.sendStatus(200);
       } else {
@@ -40,6 +41,8 @@ router.post('/login', function(req,res,next){
 
 router.post('/logout', function(req,res,next){
   req.session.user_id = null;
+  req.session.username = null;
+  res.redirect('/');
 });
 
 module.exports = router;

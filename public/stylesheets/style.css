@@ -1,5 +1,4 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -16,10 +15,11 @@ input {
 
 #editor { 
   position: absolute;
-  top: 5%;
+  top: 54px;
   right: 20%;
   bottom: 0%;
   left: 0;
+  z-index: 10;
 }
 
 .documentButtons {
@@ -27,12 +27,14 @@ input {
   float:right;
 }
 
-.container {
- margin-top: 50px;
+.liveCodeMenu{
+  margin-right: 46px;  
 }
  
 #nav {
- margin: 13px 0 0 0;
+  /*position: absolute;*/
+  display: block;
+  margin: 0 0 0 0;
 }
  
 #nav ul li {
@@ -65,3 +67,23 @@ input {
 .foundUsers > li:hover {
   background-color: #95d3e6;
 }
+
+th {
+  color: #2F4F4F;
+}
+
+.highlight {
+  background: #fafafa;
+}
+
+.save {
+  padding: 0px;
+}
+
+.hidden {
+  display: none;
+}
+.show {
+  display: block;
+}
+

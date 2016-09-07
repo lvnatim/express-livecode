@@ -1,8 +1,21 @@
 extends layout
 
 block content
+  
   div#editor= content
-  button.save="Save Document!"
+  
+
+  div.row
+    div.offset-10
+      div.two.columns.u-pull-right
+        label="Language"
+        select.u-full-width
+          option(value="Option 1")="JavaScript"
+          option(value="Option 2")="Ruby"
+          option(value="Option 3")="Python"
+        button.u-full-width.save="Save document!"
+
+
   script(src="https://cdn.socket.io/socket.io-1.4.5.js")
   script(src="/plugins/ace-builds-master/src/ace.js")
   script(src="/javascripts/livecode.js")

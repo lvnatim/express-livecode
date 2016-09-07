@@ -9,5 +9,7 @@ $(".viewDoc").on("click", function(){
 $(".document").on("click", function(){
   $(".document").not(this).removeClass('highlight');
   $(this).toggleClass('highlight');
-})
+  $(this).next().toggleClass('show');
+});
+
 

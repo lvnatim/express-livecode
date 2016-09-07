@@ -19,17 +19,18 @@ input {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 2;
   transition: display 2s;
 }
 
 .navbar{
+  background-color: white;
   border: solid 1px grey;
   padding: 10px 10px;
   top: 0;
   left: 0;
   width: 100%;
   margin: -10px -10px 0px -10px;
+  z-index: 2;
 }
 
 .navbar > ul {
@@ -81,10 +82,10 @@ input {
 
 #editor { 
   position: absolute;
-  top: 10%;
+  top: 60px;
   right: 20%;
-  bottom: 10%;
-  left: 0;
+  bottom: 0%;
+  left: 0%;
 }
 
 .documentButtons {
@@ -92,8 +93,8 @@ input {
   float:right;
 }
 
-.container {
- margin-top: 50px;
+.liveCodeMenu{
+  margin-right: 46px;  
 }
 
 .foundUsers {
@@ -113,7 +114,21 @@ input {
   background-color: #95d3e6;
 }
 
-.documentList {
-  width: 90%;
-  margin: 0 auto;
+th {
+  color: #2F4F4F;
+}
+
+.highlight {
+  background: #fafafa;
+}
+
+.save {
+  padding: 0px;
+}
+
+.hidden {
+  display: none;
+}
+.show {
+  display: block;
 }

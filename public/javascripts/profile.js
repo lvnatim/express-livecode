@@ -1,3 +1,5 @@
+
+
 $(".viewDoc").on("click", function(){
   var documentId = $(this).data("liveCode");
   var documentUrl = "/livecode/" + documentId;
@@ -13,3 +15,9 @@ $(".documentTitle").on("keypress", function(e){
   }
 
 })
+
+$(".document").on("click", function(){
+  $(".document").not(this).removeClass('highlight');
+  $(this).toggleClass('highlight');
+  $(this).next().toggleClass('show');
+});

@@ -1,19 +1,35 @@
 extends layout
 
 block content
-  div#editor= content
-  ul.documentButtons
-    li.editorList= "Editors"
-      ul
-        each user in editors
-          li= user.username
-    li
-      button="Save Document!"
-    li
-      button="Add Editor!"
-    li
-      input.userSearch(type="text" placeholder="Type in username")
-      ul.foundUsers
+
+  div.container
+
+  #editor= content
+
+  div.row
+    div.offset-9
+    div.three.columns.u-pull-right.liveCodeMenu
+      ul.documentButtons
+        li.editorList= "Editors"
+          ul
+            each user in editors
+              li= user.username
+        li
+          button="Add Editor!"
+        li
+          input.userSearch(type="text" placeholder="Type in username")
+          ul.foundUsers
+        li
+          label="Language"
+          select.u-full-width
+            option(value="Option 1")="JavaScript"
+            option(value="Option 2")="Ruby"
+            option(value="Option 3")="Python"
+        li
+          button.u-full-width.save="Save document!"
+
+
+
   script(src="https://cdn.socket.io/socket.io-1.4.5.js")
   script(src="/plugins/ace-builds-master/src/ace.js")
   script(src="/javascripts/livecode.js")

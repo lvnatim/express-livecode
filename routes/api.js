@@ -62,7 +62,7 @@ router.post('/login', function(req,res,next){
 router.post('/logout', function(req,res,next){
   req.session.user_id = null;
   req.session.username = null;
-  res.redirect('/');
+  res.sendStatus(200);
 });
 
 module.exports = router;

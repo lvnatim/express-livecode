@@ -14,14 +14,13 @@ html
               a.button(href="/")= "Home"
             -if (username)
               li
-                a.button(href="/profile")= username
+                button.profile= username
               li
-                a.button(href="/logout")= "Log Out"
+                button.logout= "Log Out"
             -else
               li
                 button.openLoginForm= "Log In"
               li
                 button.openRegisterForm= "Sign Up!" 
 
-    div.header
     block content

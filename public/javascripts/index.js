@@ -44,9 +44,22 @@ $(function(){
     $.post({
       url: '/api/login',
       data: loginData,
-      success: function(){console.log("Successful login!")},
+      success: function(){ window.location.href = "/"},
       error: function(){console.log("Invalid username/password.")}
     });
+
+  });
+
+  $('.logout').on("click", function(){
+    $.post({
+      url: '/api/logout',
+      success: function(){ window.location.href = "/"}
+    });
+
+  });
+
+  $('.profile').on("click", function(){
+    window.location.href = "/profile";
 
   });
 

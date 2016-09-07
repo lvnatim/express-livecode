@@ -94,8 +94,18 @@ $('input.userSearch').on('keyup',function(e){
     url: '/api/profiles',
     method: 'get',
     data: {username: value},
-    success: function(data){console.log(data)},
+    success: function(data){populateSearchForm(data)},
     error: function(){console.log("404 error")}
   });
 });
+
+function populateSearchForm(userArray){
+  $('.foundUsers').empty();
+  userArray.forEach(function(object){
+    $('<li>')
+      .text(object.username)
+      .appendTo($('.foundUsers'));
+  });
+
+}
 

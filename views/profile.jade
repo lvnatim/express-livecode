@@ -10,11 +10,11 @@ block content
         td= "Last Updated"
     tbody
       each val in docs
-        tr.document(data-live-code=val.dataValues.id)
-          td.documentTitle= val.dataValues.name
-          td.documentLanguage= val.dataValues.language
-          td.documentCreatedAt= val.dataValues.createdAt
-          td.documentUpdatedAt= val.dataValues.updatedAt
+        tr.document(data-live-code=val.id)
+          td.documentTitle= val.name
+          td.documentLanguage= val.language
+          td.documentCreatedAt= val.createdAt
+          td.documentUpdatedAt= val.updatedAt
           td
-            button.viewDoc(data-live-code=val.dataValues.id)= "LiveCode"
+            button.viewDoc(data-live-code=val.id)= "LiveCode"
   script(src="/javascripts/profile.js")

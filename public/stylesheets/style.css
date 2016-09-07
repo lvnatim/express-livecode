@@ -26,3 +26,11 @@ input {
   list-style-type: none;
   float:right;
 }
+
+.foundUsers {
+  list-style-type: none;
+}
+
+.foundUsers > li:hover {
+  background-color: blue;
+}

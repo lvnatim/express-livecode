@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  table
+  table.documentList
     thead
       tr
         td= "Name"
@@ -11,10 +11,14 @@ block content
     tbody
       each val in docs
         tr.document(data-live-code=val.id)
-          td.documentTitle= val.name
-          td.documentLanguage= val.language
-          td.documentCreatedAt= val.createdAt
-          td.documentUpdatedAt= val.updatedAt
+          td
+            p.documentTitle(contentEditable="true")= val.name
+          td
+            p.documentLanguage= val.language
+          td
+            p.documentCreatedAt= val.createdAt
+          td
+            p.documentUpdatedAt= val.updatedAt
           td
             button.viewDoc(data-live-code=val.id)= "LiveCode"
   script(src="/javascripts/profile.js")

@@ -1,22 +1,17 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to LiveCode!
-  .registerForm(style="display:none;")
-    input.username(placeholder='Username')
-    input.firstname(placeholder='First name')
-    input.lastname(placeholder='Last name')
-    input.email(placeholder='Email')
+  .registerForm
+    input.username(type="text" placeholder='Username')
+    input.firstname(type="text" placeholder='First name')
+    input.lastname(type="text" placeholder='Last name')
+    input.email(type="text" placeholder='Email')
     input.password(type='password' placeholder='Password')
     input.passwordCheck(type='password' placeholder='Password confirmation')
     button.register= "Register!"
+    a.closeRegisterForm(style="margin-left:20px")= "Cancel"
 
-  div.loginFormWrapper
-    .loginForm(style="display:none;")
-      input.loginUsername(placeholder='Username')
-      input.loginPassword(type='password' placeholder='Password')
-      button.login= "Login!"
+  div.hero
 
   script(src="javascripts/index.js")
     

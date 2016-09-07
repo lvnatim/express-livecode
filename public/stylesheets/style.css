@@ -1,5 +1,4 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -11,14 +10,80 @@ input {
   display: block;
 }
 
-.registerFormWrapper {
+.overlay {
+  background-color: black;
+  display: none;
+  position: absolute;
+  opacity: 0.8;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  transition: display 2s;
+}
+
+.navbar{
+  border: solid 1px grey;
+  padding: 10px 10px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin: -10px -10px 0px -10px;
+}
+
+.navbar > ul {
+  display: inline-block;
+  height: 40px;
+  list-style-type: none;
+  margin: 0px;
+}
+
+.navbar > ul.navbar-right{
+  float:right;
+}
+
+.navbar > ul > li {
+  display: inline-block;
+  margin-right: 15px;
+  margin-bottom: 0px;
+}
+
+.navbar > ul > li > button {
+  margin-bottom: 0px;
+}
+
+.registerForm {
+  background-color: white;
+  border-radius: 10px;
+  border: 2px solid grey;
+  top: -1000px;
+  left: 40%;
+  margin: 0 auto;
+  padding: 20px;
+  position: absolute;
+  width: 250px;
+  text-align: center;
+  z-index: 3;
+}
+
+.registerForm > input {
+  width: 100%;
+}
+
+.hero {
+  background-color: #95d3e6;
+  height: 700px;
+  margin: 0 auto;
+  margin-left: -10px;
+  margin-right: -10px;
 }
 
 #editor { 
   position: absolute;
-  top: 5%;
+  top: 10%;
   right: 20%;
-  bottom: 0%;
+  bottom: 10%;
   left: 0;
 }
 
@@ -29,24 +94,6 @@ input {
 
 .container {
  margin-top: 50px;
-}
- 
-#nav {
- margin: 13px 0 0 0;
-}
- 
-#nav ul li {
- display: inline;
- margin: 0 20px 0 0;
- margin-bottom: 130px;
-}
- 
-#nav a {
- text-decoration: none;
-}
- 
-#nav a:hover {
- text-decoration: underline;
 }
 
 .foundUsers {
@@ -64,4 +111,9 @@ input {
 
 .foundUsers > li:hover {
   background-color: #95d3e6;
+}
+
+.documentList {
+  width: 90%;
+  margin: 0 auto;
 }

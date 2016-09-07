@@ -1,6 +1,12 @@
 $(function(){
+  $('.closeRegisterForm').on("click", function(){
+    $('.registerForm').animate({top: "-1000px"}, 500);
+    $('.overlay').fadeOut();
+  });
+
   $('.openRegisterForm').on("click", function(){
-    $('.registerForm').toggle();
+    $('.overlay').fadeIn();
+    $('.registerForm').animate({top: "150px"}, 500);
   });
 
   //TODO: Implement client side validation, as well as server-side
@@ -27,10 +33,6 @@ $(function(){
       error: function(){console.log("there was an error!")}
     });
 
-  });
-
-  $('.openLoginForm').on("click", function(){
-    $('.loginForm').toggle();
   });
 
   $('.login').on("click", function(){

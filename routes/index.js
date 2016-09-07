@@ -3,8 +3,7 @@ var router = express.Router();
 var db = require("../models/index");
 
 router.get('/', function(req, res, next) {
-  var username = req.session.username
-  res.render('index', { username: username });
+  res.render('index', { username: req.session.username });
 });
 
 router.get('/profile', function(req, res, next) {
@@ -17,7 +16,7 @@ router.get('/profile', function(req, res, next) {
           .then(function(docs){
             var username = user.username;
             var docs = docs.map(doc => doc.dataValues);
-            res.render('profile', {docs: docs, username:username});
+            res.render('profile', {docs: docs, username: req.session.username });
         });
       })
       .catch(function(err){

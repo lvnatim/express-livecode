@@ -113,16 +113,39 @@ function populateSearchForm(userArray){
   });
 }
 
+$('.editorList').on('click', '.removeUser', function(e){
+  var $user = $(this);
+  var value = $user.data("userId");
+  var data = {userId: value, documentId: documentId};
+  $.post({
+    url: '/api/removeuser',
+    data: data,
+    success: function(){
+      $user.parent().remove()
+    },
+    error: function(){}
+  });
+})
+
 $('.foundUsers').on('click', '.userButton', function(e){
-  var value = $(this).data("userId");
+  var $user = $(this);
+  var value = $user.data("userId");
   var data = {userId: value, documentId: documentId};
   $.post({
     url: '/api/adduser',
     data: data,
-    success: function(){"successful addition!"},
-    error: function(){"unsuccessful addition"}
-  })
-
-
+    success: function(){
+      var newListNode = $("<li>")
+        .text($user.text());
+      $("<a>")
+        .addClass("removeUser")
+        .attr("data-user-id", value)
+        .text("x")
+        .appendTo(newListNode);
+      newListNode
+        .appendTo($(".editorList"));
+    },
+    error: function(){}
+  });
 })
 

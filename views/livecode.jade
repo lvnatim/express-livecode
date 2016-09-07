@@ -9,6 +9,7 @@ block content
       label="Editors"
       each user in editors
         li= user.username
+          a.removeUser(data-user-id=user.id)="x"
     ul.documentButtons
       li.findUsers
         input.userSearch(type="text" placeholder="Add an editor!")

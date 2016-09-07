@@ -2,14 +2,6 @@ var express = require('express');
 var router = express.Router();
 var db = require('../models/index');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  db.User.findById(1)
-    .then((user)=>console.log(user))
-    .catch((err)=>console.log(err));
-  res.send('respond with a resource');
-});
-
 router.get('/profiles', function(req,res,next){
   db.User
     .findAll({
@@ -62,15 +54,13 @@ router.post('/logout', function(req,res,next){
   req.session.user_id = null;
   req.session.username = null;
   res.sendStatus(200);
+  res.redirect("/");
 });
 
 router.post('/adduser', function(req, res, next){
   var documentId = req.body.documentId;
   var userId = req.body.userId;
-  console.log(documentId);
-  console.log(userId);
-
-  var user = db.User
+  db.User
     .findById(userId)
     .then(user => {
       var doc = db.Document
@@ -79,6 +69,34 @@ router.post('/adduser', function(req, res, next){
           if(doc.owned_id === req.session.user_id){
             doc.addUser(user);
             res.sendStatus(200);
+          } else {
+            res.sendStatus(404);
+          }
+        })
+        .catch(err => {
+          res.sendStatus(404);
+        });
+    })
+    .catch(err => {
+      res.sendStatus(404);
+    });
+});
+
+router.post('/removeuser', function(req, res, next){
+  var documentId = req.body.documentId;
+  var userId = req.body.userId;
+  db.User
+    .findById(userId)
+    .then(user => {
+      var doc = db.Document
+        .findById(documentId)
+        .then(doc => {
+          if(doc.owned_id === req.session.user_id){
+            if(!doc.hasUser(user)){
+              res.sendStatus(404);
+            }
+            doc.removeUser(user);
+            res.sendStatus(200);      
           } else {
             res.sendStatus(404);
           }

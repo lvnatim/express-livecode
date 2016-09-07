@@ -35,19 +35,20 @@ router.get('/new', function(req, res, next){
 
 router.get('/:id', function(req, res, next){
   db.Document.findById(req.params.id)
-  .then(function(doc){
-    var editors = doc.getUsers()
-      .then(function(users){
-        var users = users.map(user=> user.dataValues);
-        res.render('livecode', {
-          content: doc.content,
-          editors: users
+    .then(function(doc){
+      var editors = doc.getUsers()
+        .then(function(users){
+          var users = users.map(user=> user.dataValues);
+          res.render('livecode', {
+            content: doc.content,
+            editors: users,
+            username: req.session.username
+          });
         });
-      });
-  })
-  .catch(function(doc){
-    res.redirect('/');
-  })
+    })
+    .catch(function(doc){
+      res.redirect('/');
+    });
 });
 
 router.get('/:id/reload', function(req, res, next){

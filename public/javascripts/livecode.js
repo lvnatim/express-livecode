@@ -94,18 +94,27 @@ $('input.userSearch').on('keyup',function(e){
     url: '/api/profiles',
     method: 'get',
     data: {username: value},
-    success: function(data){populateSearchForm(data)},
+    success: function(data){
+      populateSearchForm(data)
+    },
     error: function(){console.log("404 error")}
   });
 });
+
+// helper function used in input user search
 
 function populateSearchForm(userArray){
   $('.foundUsers').empty();
   userArray.forEach(function(object){
     $('<li>')
+      .addClass("userButton")
+      .attr("data-user-id", object.id)
       .text(object.username)
       .appendTo($('.foundUsers'));
   });
-
 }
+
+$('.foundUsers').on('click', '.userbutton', function(e){
+  
+})
 

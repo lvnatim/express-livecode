@@ -36,22 +36,27 @@ router.get('/new', function(req, res, next){
 router.get('/:id', function(req, res, next){
   db.Document.findById(req.params.id)
   .then(function(doc){
-    if(doc){
-      res.render('livecode', {content: doc.content});
-    } else {
-      res.redirect('/');
-    }
-  });
+    var editors = doc.getUsers()
+      .then(function(users){
+        var users = users.map(user=> user.dataValues);
+        res.render('livecode', {
+          content: doc.content,
+          editors: users
+        });
+      });
+  })
+  .catch(function(doc){
+    res.redirect('/');
+  })
 });
 
 router.get('/:id/reload', function(req, res, next){
   db.Document.findById(req.params.id)
     .then(function(doc){
-      if(doc){
-        res.send(doc.content);
-      } else {
-        res.sendStatus(404);
-      }
+      res.send(doc.content);
+    })
+    .catch(function(err){
+      res.sendStatus(404);
     });
 });
 
@@ -61,8 +66,6 @@ router.put('/:id', function(req,res,next){
   } else {
     db.Document.findById(req.params.id)
     .then(function(doc){
-      console.log(typeof doc.owned_id);
-      console.log(typeof req.session.user_id);
       if(doc && doc.owned_id === req.session.user_id){
         doc.content = req.body.content
         doc.save()

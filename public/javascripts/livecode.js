@@ -1,15 +1,14 @@
 var editor = ace.edit("editor");
+var Range = ace.require('ace/range').Range;
+var editSession = editor.getSession();
+var socket = io.connect('http://localhost:3000');
+var documentId = window.location.pathname.split('/')[2];
+var onlylisten = false;
+
 editor.$blockScrolling = Infinity;
 editor.setTheme("ace/theme/monokai");
 editor.getSession().setMode("ace/mode/javascript");
 
-var Range = ace.require('ace/range').Range;
-var editSession = editor.getSession();
-
-var onlylisten = false;
-
-var socket = io.connect('http://localhost:3000');
-var documentId = window.location.pathname.split('/')[2];
 socket.emit('JOIN', documentId);
 
 socket.on('STOP', function(data){
@@ -114,7 +113,8 @@ function populateSearchForm(userArray){
   });
 }
 
-$('.foundUsers').on('click', '.userbutton', function(e){
-  
+$('.foundUsers').on('click', '.userButton', function(e){
+  var value = $(this).data("userId");
+  console.log(value);
 })
 

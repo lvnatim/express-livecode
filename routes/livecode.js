@@ -60,6 +60,14 @@ router.get('/:id/reload', function(req, res, next){
     });
 });
 
+router.post('/:id/adduser', function(req, res, next){
+  res.sendStatus(200);
+});
+
+router.post('/:id/removeuser', function(req, res, next){
+  res.sendStatus(200);
+});
+
 router.put('/:id', function(req,res,next){
   if(!req.session.user_id){
     res.sendStatus(404);

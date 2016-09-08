@@ -10,6 +10,21 @@ input {
   display: block;
 }
 
+th {
+  color: #2F4F4F;
+}
+
+/*div.hero#editor>span {
+  font-size: 50rem;
+  right:0%;
+  left: 0%;
+  z-index: 100;
+}*/
+.welcome{
+  color: white;
+  font-size: 20rem;
+}
+
 .overlay {
   background-color: black;
   display: none;
@@ -76,16 +91,31 @@ input {
   background-color: #95d3e6;
   height: 700px;
   margin: 0 auto;
+  margin-left: 0px;
+  margin-right: 0px;
+
+}
+
+.hero.filter{
+  z-index: 1000;
+  position: absolute;
+  width: 100%;
   margin-left: -10px;
   margin-right: -10px;
+  background-color:rgba(0,0,75,0.7);
 }
 
 #editor { 
   position: absolute;
   top: 60px;
   right: 20%;
-  bottom: 0%;
+  bottom: 20%;
   left: 0%;
+}
+
+#editor.banner {
+  right:0%;
+  bottom:0%;
 }
 
 .sidebar {
@@ -123,9 +153,6 @@ input {
   background-color: #95d3e6;
 }
 
-th {
-  color: #2F4F4F;
-}
 
 .highlight {
   background: #fafafa;

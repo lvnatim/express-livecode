@@ -11,12 +11,15 @@ block content
     button.register= "Register!"
     a.closeRegisterForm(style="margin-left:20px")= "Cancel"
 
-  div.hero
+  div.hero.filter
+    span.welcome= "Live-Code"
+  div.hero#editor.banner= randomDoc.content
 
-  div.container.row#editor= randomDoc.content
+
   
   script(src="https://cdn.socket.io/socket.io-1.4.5.js")
   script(src="javascripts/index.js")
   script(src="/plugins/ace-builds-master/src/ace.js")
+
 
     

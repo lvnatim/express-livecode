@@ -151,6 +151,14 @@ $('.foundUsers').on('click', '.userButton', function(e){
 
 $('.showComments').on('click', function(){
   $('.commentBar').animate({"left":"75%"});
+
+  $.get({
+    url: '/api/comments',
+    data: {documentId: documentId},
+    success: function(data){console.log("error")},
+    error: function(data){}
+  })
+
 });
 
 $('.hideComments').on('click', function(){

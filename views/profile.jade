@@ -4,6 +4,7 @@ block content
   table.u-full-width
     thead
       th= "Name"
+      th= "Owner"
       th= "Language"
       th= "Date Created"
       th= "Last Updated"
@@ -13,6 +14,8 @@ block content
         tr.document(data-live-code=val.id)
           td
             p.documentTitle(contentEditable="true")= val.name
+          td
+            p.documentOwnerId= val.owned_id
           td
             p.documentLanguage= val.language
           td

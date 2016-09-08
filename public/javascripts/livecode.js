@@ -149,3 +149,11 @@ $('.foundUsers').on('click', '.userButton', function(e){
   });
 })
 
+$('.showComments').on('click', function(){
+  $('.commentBar').animate({"left":"75%"});
+});
+
+$('.hideComments').on('click', function(){
+  $('.commentBar').animate({"left":"175%"});
+});
+

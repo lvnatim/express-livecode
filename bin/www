@@ -31,6 +31,24 @@ io.use(sharedsession(session));
 
 io.on("connection", function(socket) {
 
+  socket.on('index-view', function(){
+    console.log("view test");
+   db.Document
+    //todo: randomize id #
+      .findAll({
+        where: {id: 1}
+      })
+      .then(function(data){
+        console.log(data[0].dataValues.id);
+        socket.join("VIEWONLY"+data[0].dataValues.id)
+        io.to("VIEWONLY"+data[0].dataValues.id).emit('index user connected');
+      })   
+  });
+      //grab random (active) document
+      //view only mode
+      //display ace editor live coding
+  
+
     socket.on('JOIN', function(documentId){
       var user_id = socket.handshake.session.user_id
       var roomToJoin = documentId.toString();
@@ -75,16 +93,7 @@ io.on("connection", function(socket) {
       }
     });
 
-    //namespaced socket for splash page
-    //TODO: randomize id selector
-    
-    // var randomDoc = myArray[Math.floor(Math.random() * myArray.length)];
 
-    var nsp = io.of('/livecode/'+'1';
-    nsp.on('connection', function(socket){
-      console.log('someone connected');
-    });
-    nsp.emit("hi", "everyone!");
 })   
 
 

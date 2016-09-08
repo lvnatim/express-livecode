@@ -1,7 +1,3 @@
-  //todo: implement socket functionality here to 
-  //populate splash page with randomly selected
-  //live document
-//to do: get view only version
 
 $(function(){
 
@@ -48,13 +44,11 @@ $(function(){
       editSession.remove(removeRange);
       onlylisten = false;
     }
-
   });
 
-
-
   $('.openRegisterForm').on("click", function(){
-    $('.registerForm').toggle();
+    $('.overlay').fadeIn();
+    $('.registerForm').animate({top: "150px"}, 500);
   });
 
   //TODO: Implement client side validation, as well as server-side
@@ -81,10 +75,6 @@ $(function(){
       error: function(){console.log("there was an error!")}
     });
 
-  });
-
-  $('.openLoginForm').on("click", function(){
-    $('.loginForm').toggle();
   });
 
   $('.login').on("click", function(){

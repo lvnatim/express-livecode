@@ -5,11 +5,14 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/Skeleton/css/skeleton.css')
     script(type='text/javascript' src="/javascripts/jquery-3.1.0.js")
+    script(src="/javascripts/index.js")
   body
-    div#nav
-      ul
+    div.overlay
+    div.navbar
+      ul.navbar-left
         li
           a.button(href="/")= "Home"
+      ul.navbar-right
         -if (username)
           li
             button.profile= username
@@ -17,8 +20,12 @@ html
             button.logout= "Log Out"
         -else
           li
-            button.openLoginForm= "Log In"
+            input.loginUsername(type="text" placeholder="username")
           li
-            button.openRegisterForm= "Sign Up!" 
-
+            input.loginPassword(type="password" placeholder="password")
+          li
+            button.login= "Log In"
+          li
+            a.openRegisterForm= "Sign Up!" 
+    
     block content

@@ -26,9 +26,28 @@ app.set('port', port);
 var server = http.createServer(app);
 
 var io = require("socket.io")(server);
+
 io.use(sharedsession(session));
 
 io.on("connection", function(socket) {
+
+  socket.on('index-view', function(){
+    console.log("view test");
+   db.Document
+    //todo: randomize id #
+      .findAll({
+        where: {id: 1}
+      })
+      .then(function(data){
+        console.log(data[0].dataValues.id);
+        socket.join("VIEWONLY"+data[0].dataValues.id)
+        io.to("VIEWONLY"+data[0].dataValues.id).emit('index user connected');
+      })   
+  });
+      //grab random (active) document
+      //view only mode
+      //display ace editor live coding
+  
 
     socket.on('JOIN', function(documentId){
       var roomToJoin = documentId.toString();
@@ -79,6 +98,7 @@ io.on("connection", function(socket) {
         delete socket.handshake.session.can_write;
       }
     });
+
 
 })   
 

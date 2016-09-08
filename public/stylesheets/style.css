@@ -103,6 +103,14 @@ ul {
   background-color:rgba(0,0,75,0.7);
 }
 
+.hero.filter span {
+  color:white;
+  font-size: 20rem;
+  line-height: 700px;
+  right: 50%;
+  left: 50%;
+}
+
 #editor { 
   position: absolute;
   top: 60px;

@@ -4,7 +4,23 @@ block content
 
   #editor= content
 
-  div.sidebar
+  .commentBar
+    .comments
+      .comment
+        p= "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+      .comment
+        p= "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+      .comment
+        p= "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+      .comment
+        p= "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+    .commentForm
+      input.commentLine(type="number" placeholder='Line number')
+      textarea.commentContent(placeholder='Your comment here')
+      button.submitComment= "Add comment"
+      button.hideComments= "cancel"
+
+  .sidebar
     ul.editorList
       label="Editors"
       each user in editors
@@ -21,8 +37,8 @@ block content
           option(value="Option 2")="Ruby"
           option(value="Option 3")="Python"
       li
-        button.u-full-width.save="Save document!"
-
+        button.u-full-width.save="Save document"
+        button.u-full-width.showComments= "Show comments"
 
 
   script(src="https://cdn.socket.io/socket.io-1.4.5.js")

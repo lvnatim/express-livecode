@@ -34,9 +34,11 @@ router.post('/register', function(req,res,next) {
 });
 
 router.post('/login', function(req,res,next){
+  var username = req.body.username;
+  var password = req.body.password;
   db.User
     .findOne(
-      {where: req.body}
+      {where: {username: username, password: password}}
     )
     .then(function(user){
       if(user){

@@ -14,12 +14,10 @@ th {
   color: #2F4F4F;
 }
 
-/*div.hero#editor>span {
-  font-size: 50rem;
-  right:0%;
-  left: 0%;
-  z-index: 100;
-}*/
+ul {
+  list-style-type: none;
+}
+
 .welcome{
   color: white;
   font-size: 20rem;
@@ -108,8 +106,8 @@ th {
 #editor { 
   position: absolute;
   top: 60px;
-  right: 20%;
-  bottom: 20%;
+  right:25%;
+  bottom: 0%;
   left: 0%;
 }
 
@@ -123,12 +121,52 @@ th {
   position: absolute;
   top: 60px;
   right: 0%;
-  left: 80%;
+  left: 75%;
   bottom: 0%;
+}
+
+.removeUser {
+  margin-right: 20px;
+  float: right;
 }
 
 .sidebar > ul {
   list-style-type: none;
+}
+
+.commentBar {
+  background-color: white;
+  padding: 10px;
+  position: absolute;
+  top: 60px;
+  right: 0%;
+  left: 175%;
+  bottom: 0%;
+  z-index: 3;
+}
+
+.comments {
+  overflow: scroll;
+  position: absolute;
+  top:0px;
+  bottom: 30%;
+}
+
+.commentForm {
+  position: absolute;
+  bottom: 2%;
+}
+
+.comment > p{
+  font-family: monospace;
+}
+
+.commentForm > input,
+.commentForm > textarea,
+.commentForm > button {
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 10px;
 }
 
 .findUsers > input {

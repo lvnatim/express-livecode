@@ -61,6 +61,19 @@ router.post('/logout', function(req,res,next){
   res.redirect("/");
 });
 
+router.get('/comments', function(req,res,next){
+  var documentId = req.body.documentId;
+  db.Document
+    .findById(documentId)
+    .then(doc => {
+      console.log(doc);
+      doc.getComments()
+        .then(comments=>{
+          console.log(comments);
+        });
+    });
+});
+
 router.post('/adduser', function(req, res, next){
   var documentId = req.body.documentId;
   var userId = req.body.userId;

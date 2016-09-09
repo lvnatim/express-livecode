@@ -1,5 +1,3 @@
-//TODO: Open sockets for each document here? Or only on click?
-
 $(".viewDoc").on("click", function(){
   var documentId = $(this).data("liveCode");
   var documentUrl = "/livecode/" + documentId;

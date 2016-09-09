@@ -13,32 +13,12 @@ th {
 ul {
   list-style-type: none; }
 
-footer {
-  left: 0;
-  right: 0;
-  height: 50px;
-  background-color: lightblue;
-  clear: both; }
-
 .fl {
-  box-sizing: border-box;
-  float: left;
-  text-align: center;
-  height: 200px;
-  background-color: lightgrey; }
-
-.navbuttons {
-  margin: 45px; }
-
-.clearfix {
-  clear: both; }
+  float: left; }
 
 .welcome {
   color: white;
   font-size: 20rem; }
-
-.commentTemplate {
-  display: none; }
 
 .overlay {
   background-color: black;
@@ -57,7 +37,8 @@ footer {
   padding: 10px 10px;
   top: 0;
   left: 0;
-  margin: -10px 0px 0px 0px;
+  width: 100%;
+  margin: -10px -10px 0px -10px;
   z-index: 2; }
 
 .navbar > ul {
@@ -104,8 +85,8 @@ footer {
   position: absolute;
   height: 700px;
   width: 100%;
-  left: 0;
-  right: 0;
+  margin-left: -10px;
+  margin-right: -10px;
   background-color: rgba(0, 0, 75, 0.7);
   z-index: 5; }
 
@@ -122,13 +103,11 @@ footer {
   top: 60px;
   right: 25%;
   bottom: 0%;
-  left: 0%;
-  font-size: 50px; }
+  left: 0%; }
 
 #editor.banner {
   right: 0%;
-  bottom: 0%;
-  top: 52px; }
+  bottom: 0%; }
 
 .sidebar {
   padding: 10px;

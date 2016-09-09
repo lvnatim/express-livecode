@@ -1,18 +1,24 @@
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 a {
-  color: #00B7FF;
-}
+  color: #00B7FF; }
 
 input {
-  display: block;
-}
+  display: block; }
+
+th {
+  color: #2F4F4F; }
 
 ul {
-  list-style-type: none;
-}
+  list-style-type: none; }
+
+.fl {
+  float: left; }
+
+.welcome {
+  color: white;
+  font-size: 20rem; }
 
 .overlay {
   background-color: black;
@@ -23,10 +29,9 @@ ul {
   left: 0;
   right: 0;
   bottom: 0;
-  transition: display 2s;
-}
+  transition: display 2s; }
 
-.navbar{
+.navbar {
   background-color: white;
   border: solid 1px grey;
   padding: 10px 10px;
@@ -34,29 +39,24 @@ ul {
   left: 0;
   width: 100%;
   margin: -10px -10px 0px -10px;
-  z-index: 2;
-}
+  z-index: 2; }
 
 .navbar > ul {
   display: inline-block;
   height: 40px;
   list-style-type: none;
-  margin: 0px;
-}
+  margin: 0px; }
 
-.navbar > ul.navbar-right{
-  float:right;
-}
+.navbar > ul.navbar-right {
+  float: right; }
 
 .navbar > ul > li {
   display: inline-block;
   margin-right: 15px;
-  margin-bottom: 0px;
-}
+  margin-bottom: 0px; }
 
 .navbar > ul > li > button {
-  margin-bottom: 0px;
-}
+  margin-bottom: 0px; }
 
 .registerForm {
   background-color: white;
@@ -69,28 +69,45 @@ ul {
   position: absolute;
   width: 250px;
   text-align: center;
-  z-index: 3;
-}
+  z-index: 3; }
 
 .registerForm > input {
-  width: 100%;
-}
+  width: 100%; }
 
 .hero {
   background-color: #95d3e6;
   height: 700px;
   margin: 0 auto;
+  margin-left: 0px;
+  margin-right: 0px; }
+
+.filter {
+  position: absolute;
+  height: 700px;
+  width: 100%;
   margin-left: -10px;
   margin-right: -10px;
-}
+  background-color: rgba(0, 0, 75, 0.7);
+  z-index: 5; }
 
-#editor { 
+.filter > span {
+  display: block;
+  color: white;
+  font-size: 20rem;
+  line-height: 700px;
+  right: 50%;
+  left: 50%; }
+
+#editor {
   position: absolute;
   top: 60px;
-  right:25%;
+  right: 25%;
   bottom: 0%;
-  left: 0%;
-}
+  left: 0%; }
+
+#editor.banner {
+  right: 0%;
+  bottom: 0%; }
 
 .sidebar {
   padding: 10px;
@@ -98,17 +115,14 @@ ul {
   top: 60px;
   right: 0%;
   left: 75%;
-  bottom: 0%;
-}
+  bottom: 0%; }
 
 .removeUser {
   margin-right: 20px;
-  float: right;
-}
+  float: right; }
 
 .sidebar > ul {
-  list-style-type: none;
-}
+  list-style-type: none; }
 
 .commentBar {
   background-color: white;
@@ -118,70 +132,55 @@ ul {
   right: 0%;
   left: 175%;
   bottom: 0%;
-  z-index: 3;
-}
+  z-index: 3; }
 
 .comments {
   overflow: scroll;
   position: absolute;
-  top:0px;
-  bottom: 30%;
-}
+  top: 0px;
+  bottom: 30%; }
 
 .commentForm {
   position: absolute;
-  bottom: 2%;
-}
+  bottom: 2%; }
 
-.comment > p{
+.comment > p {
   font-family: monospace;
-}
+  color: blue; }
 
 .commentForm > input,
 .commentForm > textarea,
 .commentForm > button {
   width: 100%;
   margin: 0 auto;
-  margin-bottom: 10px;
-}
+  margin-bottom: 10px; }
 
 .findUsers > input {
   width: 100%;
-  margin: 0 auto;
-}
+  margin: 0 auto; }
 
 .foundUsers {
   list-style-type: none;
-  margin-left: 0;
-}
+  margin-left: 0; }
 
 .foundUsers > li {
   border-radius: 10px;
   margin-top: 0px;
   margin-bottom: 0px;
   width: 100%;
-  height: 38px;
-}
+  height: 38px; }
 
 .foundUsers > li:hover {
-  background-color: #95d3e6;
-}
-
-th {
-  color: #2F4F4F;
-}
+  background-color: #95d3e6; }
 
 .highlight {
-  background: #fafafa;
-}
+  background: #fafafa; }
 
 .save {
-  padding: 0px;
-}
+  padding: 0px; }
 
 .hidden {
-  display: none;
-}
+  display: none; }
+
 .show {
-  display: block;
-}
+  display: block; }

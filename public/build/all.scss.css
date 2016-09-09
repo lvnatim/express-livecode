@@ -37,6 +37,9 @@ footer {
   color: white;
   font-size: 20rem; }
 
+.commentTemplate {
+  display: none; }
+
 .overlay {
   background-color: black;
   display: none;

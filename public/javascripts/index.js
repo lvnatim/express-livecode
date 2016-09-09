@@ -53,7 +53,7 @@ $(function(){
 
   //TODO: Implement client side validation, as well as server-side
 
-  $('.register').on("click", function(){
+  $('.registerForm').on("click", '.register', function(){
     var username = $(".username").val();
     var firstname = $(".firstname").val();
     var lastname = $(".lastname").val();

@@ -114,6 +114,24 @@ function populateSearchForm(userArray){
   });
 }
 
+function populateCommentBox(commentArray){
+  $.get({
+    url: '/api/comments',
+    data: {documentId: documentId},
+    success: function(commentArray){
+      $('.comments').empty();
+      commentArray.forEach(comment=>{
+        var $comment = $('.commentTemplate').clone().removeClass('commentTemplate');
+        $comment.find('.line').text(comment.line);
+        $comment.find('.username').text(comment.User.username);
+        $comment.find('.content').text(comment.content);
+        $comment.appendTo('.comments');
+      })
+    },
+    error: function(data){}
+  });
+}
+
 $('.editorList').on('click', '.removeUser', function(e){
   var $user = $(this);
   var value = $user.data("userId");
@@ -152,15 +170,29 @@ $('.foundUsers').on('click', '.userButton', function(e){
 
 $('.showComments').on('click', function(){
   $('.commentBar').animate({"left":"75%"});
+  populateCommentBox();
+});
 
-  $.get({
+$('.submitComment').on('click', function(){
+  var commentLine = $('.commentLine').val();
+  var commentContent = $('.commentContent').val();
+  console.log(commentLine, commentContent);
+  $.post({
     url: '/api/comments',
-    data: {documentId: documentId},
-    success: function(data){console.log("error")},
-    error: function(data){}
+    data: {
+      documentId: documentId,
+      line: commentLine,
+      content: commentContent
+    },
+    success: function(){
+      populateCommentBox();
+    },
+    error: function(){}
   })
 
+  $
 });
+
 
 $('.hideComments').on('click', function(){
   $('.commentBar').animate({"left":"175%"});

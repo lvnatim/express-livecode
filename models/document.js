@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        Document.hasMany(models.Comment)
+        Document.hasMany(models.Comment);
         Document.belongsToMany(models.User, 
           {
             through: {

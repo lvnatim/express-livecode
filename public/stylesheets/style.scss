@@ -1,5 +1,5 @@
 $primary-color: black ;
-
+$default-spacing: 15px;
 
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -21,10 +21,30 @@ ul {
   list-style-type:none;
 }
 
+footer {
+  left: 0;
+  right: 0;
+  height: 50px;
+  background-color: lightblue; 
+  clear: both;
+}
+
 // helpers
 
 .fl{
-  float:left;
+  box-sizing: border-box;
+  float: left;
+  text-align: center;
+  height: 200px;
+  background-color: lightgrey;
+}
+
+.navbuttons{
+  margin: 3*($default-spacing);
+}
+
+.clearfix {
+  clear:both;
 }
 
 .welcome {
@@ -54,8 +74,7 @@ ul {
   padding: 10px 10px;
   top: 0;
   left: 0;
-  width: 100%;
-  margin: -10px -10px 0px -10px;
+  margin: -10px 0px 0px 0px;
   z-index: 2;
 }
 
@@ -110,8 +129,8 @@ ul {
   position: absolute;
   height: 700px;
   width: 100%;
-  margin-left: -10px;
-  margin-right: -10px;
+  left: 0;
+  right: 0;
   background-color:rgba(0,0,75,0.7);
   z-index: 5;
 }
@@ -131,11 +150,13 @@ ul {
   right:25%;
   bottom: 0%;
   left: 0%;
+  font-size: 50px;
 }
 
 #editor.banner {
   right:0%;
   bottom:0%;
+  top: 52px;
 }
 
 .sidebar {

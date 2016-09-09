@@ -13,12 +13,32 @@ th {
 ul {
   list-style-type: none; }
 
+footer {
+  left: 0;
+  right: 0;
+  height: 50px;
+  background-color: lightblue;
+  clear: both; }
+
 .fl {
-  float: left; }
+  box-sizing: border-box;
+  float: left;
+  text-align: center;
+  height: 200px;
+  background-color: lightgrey; }
+
+.navbuttons {
+  margin: 45px; }
+
+.clearfix {
+  clear: both; }
 
 .welcome {
   color: white;
   font-size: 20rem; }
+
+.commentTemplate {
+  display: none; }
 
 .overlay {
   background-color: black;
@@ -37,8 +57,7 @@ ul {
   padding: 10px 10px;
   top: 0;
   left: 0;
-  width: 100%;
-  margin: -10px -10px 0px -10px;
+  margin: -10px 0px 0px 0px;
   z-index: 2; }
 
 .navbar > ul {
@@ -85,8 +104,8 @@ ul {
   position: absolute;
   height: 700px;
   width: 100%;
-  margin-left: -10px;
-  margin-right: -10px;
+  left: 0;
+  right: 0;
   background-color: rgba(0, 0, 75, 0.7);
   z-index: 5; }
 
@@ -103,11 +122,13 @@ ul {
   top: 60px;
   right: 25%;
   bottom: 0%;
-  left: 0%; }
+  left: 0%;
+  font-size: 50px; }
 
 #editor.banner {
   right: 0%;
-  bottom: 0%; }
+  bottom: 0%;
+  top: 52px; }
 
 .sidebar {
   padding: 10px;

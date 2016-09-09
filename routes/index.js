@@ -11,7 +11,7 @@ router.get('/profile', function(req, res, next) {
     .findById(req.session.user_id)
     .then(function(user){
       user
-        .getDocuments()
+        .getDocuments({})
         .then(function(docs){
           var username = user.username;
           var docs = docs.map(doc => doc.dataValues);

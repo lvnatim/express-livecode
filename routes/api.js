@@ -22,9 +22,8 @@ router.get('/profiles', function(req,res,next){
 });
 
 router.post('/register', function(req,res,next) {
-  db.User
-    .build(req.body)
-    .save()
+  var user = db.User
+    .create(req.body)
     .then(function(user){
       res.sendStatus(200);
     })
@@ -58,17 +57,54 @@ router.post('/logout', function(req,res,next){
 });
 
 router.get('/comments', function(req,res,next){
-  var documentId = req.body.documentId;
+  var documentId = req.query.documentId;
   db.Document
     .findById(documentId)
     .then(doc => {
-      console.log(doc);
-      doc.getComments()
+      doc.getComments({
+          attributes: ['id', 'content', 'line'],
+          include: [{
+            model: db.User,
+            attributes: ['username']
+          }]
+        })
         .then(comments=>{
-          console.log(comments);
-        });
+          res.send(comments);
+        })
+        .catch(err=>{
+          res.sendStatus(404);
+        })
     });
 });
+
+router.post('/comments', function(req,res,next){
+  var documentId = req.body.documentId;
+  var userId;
+  if (req.session.user_id){
+    userId = req.session.user_id;
+  } else {
+    userId = 1;
+  }
+  var commentData = req.body.commentData;
+  db.User
+    .findById(userId)
+    .then(user=>{
+      db.Document
+        .findById(documentId)
+        .then(doc=>{
+          db.Comment
+            .create({
+              content: req.body.content,
+              line: req.body.line,
+            })
+            .then(comment=>{
+              comment.setUser(user);
+              comment.setDocument(doc);
+              res.send(comment);
+            });
+        });
+    });
+})
 
 router.post('/adduser', function(req, res, next){
   var documentId = req.body.documentId;

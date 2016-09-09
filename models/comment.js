@@ -11,6 +11,5 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  sequelize.sync();
   return Comment;
 };

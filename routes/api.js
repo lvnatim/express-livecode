@@ -80,6 +80,7 @@ router.get('/comments', function(req,res,next){
 });
 
 router.post('/comments', function(req,res,next){
+  var commentData = req.body.commentData;
   var documentId = req.body.documentId;
   var userId;
   if (req.session.user_id){
@@ -87,7 +88,6 @@ router.post('/comments', function(req,res,next){
   } else {
     userId = 1;
   }
-  var commentData = req.body.commentData;
   db.User
     .findById(userId)
     .then(user=>{
@@ -108,16 +108,37 @@ router.post('/comments', function(req,res,next){
     });
 })
 
+// router.delete('/comments', function(req,res,next){
+//   var commentId = req.body.commentId;
+//   var userId = req.body.userId;
+// })
+
+router.get('/document', function(req, res, next){
+  db.Document
+    .findById(req.query.documentId, {
+      include: [{
+        model: db.User,
+        attributes: ["id","username"]
+      }]
+    })
+    .then(doc=>{
+      res.send(doc.dataValues);
+    })
+    .catch(function(err){
+      res.sendStatus(404);
+    });
+});
+
 router.post('/adduser', function(req, res, next){
   var documentId = req.body.documentId;
   var userId = req.body.userId;
   db.User
     .findById(userId)
     .then(user => {
-      var doc = db.Document
+      db.Document
         .findById(documentId)
         .then(doc => {
-          if(doc.owned_id === req.session.user_id){
+          if(doc.OwnerId === req.session.user_id){
             doc.addUser(user);
             res.sendStatus(200);
           } else {
@@ -142,7 +163,7 @@ router.post('/removeuser', function(req, res, next){
       var doc = db.Document
         .findById(documentId)
         .then(doc => {
-          if(doc.owned_id === req.session.user_id){
+          if(doc.OwnerId === req.session.user_id){
             if(!doc.hasUser(user)){
               res.sendStatus(404);
             }

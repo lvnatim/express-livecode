@@ -17,6 +17,7 @@ router.get('/new', function(req, res, next){
         })
         .then(doc=>{
           doc.addUser(user);
+          doc.setOwner(user);
           res.redirect('/livecode/' + doc.id);
         });
       } else {
@@ -26,17 +27,36 @@ router.get('/new', function(req, res, next){
 });
 
 router.get('/:id', function(req, res, next){
-  db.Document.findById(req.params.id)
-    .then(doc => {
-      var editors = doc.getUsers()
-        .then(function(users){
-          var users = users.map(user=> user.dataValues);
+  db.Document
+    .findById(req.params.id, {
+      include: [{
+        model: db.User,
+        attributes: ["id","username", "firstName", "lastName"]
+      }]
+    })
+    .then(doc=>{
+      db.User
+      .findById(req.session.user_id)
+      .then(function(user){
+        if(user){
+          user
+            .getDocuments()
+            .then(docs=>{
+              docs = docs.map(singleDoc => singleDoc.dataValues);
+              res.render('livecode', {
+                doc: doc.dataValues,
+                docs: docs,
+                username: req.session.username
+              });
+            });
+        } else {
           res.render('livecode', {
-            content: doc.content,
-            editors: users,
+            doc: doc.dataValues,
+            docs: [],
             username: req.session.username
           });
-        });
+        }
+      });
     })
     .catch(function(err){
       res.redirect('/');
@@ -54,31 +74,25 @@ router.get('/:id/reload', function(req, res, next){
 });
 
 router.put('/:id', function(req,res,next){
-  db.User.findById(req.session.user_id)
-    .then(user=>{
-      db.Document.findById(req.params.id)
-        .then(doc=> {
-          doc.hasUser(user)
-            .then(result=>{
-              if(result){              
-                doc.content = req.body.content;
-                doc.save()
-                .then(function(doc){
-                  res.sendStatus(200);
-                });
-              } else {
-                console.log("result is false!");
-                res.sendStatus(404);
-              }
-            });
-        });
-    });
+  db.User
+  .findById(req.session.user_id)
+  .then(user=>{
+    db.Document.findById(req.params.id)
+      .then(doc=> {
+        doc.hasUser(user)
+          .then(result=>{
+            if(result){              
+              doc.content = req.body.content;
+              doc.save()
+              .then(function(doc){
+                res.sendStatus(200);
+              });
+            } else {
+              res.sendStatus(404);
+            }
+          });
+      });
+  });
 });
-
-
-// TODO: Implement a req.session.user_id check function to dry out code
-// function checkUserId(req, callback){
-
-// }
 
 module.exports = router;

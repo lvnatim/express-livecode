@@ -48,25 +48,32 @@ io.on("connection", function(socket) {
       //view only mode
       //display ace editor live coding
   
-
     socket.on('JOIN', function(documentId){
       var user_id = socket.handshake.session.user_id
       var roomToJoin = documentId.toString();
-      db.Document.findById(documentId)
-        .then(function(doc){
-          if(doc && doc.owned_id === user_id){
-            socket.broadcast.to(roomToJoin).emit('SAVE');
-            socket.join(roomToJoin);
-            socket.handshake.session.can_write = true;
-            console.log("User join read/write for room", documentId);
-          } else {
-            socket.join("VIEWONLY"+documentId);
-            socket.emit("STOP");
-            socket.broadcast.to(roomToJoin).emit('SAVE');
-            console.log("User joined read only for room", documentId);
-          };
+      db.User
+        .findById(user_id)
+        .then(user=>{
+          db.Document
+            .findById(documentId)
+            .then(doc=>{
+              doc
+                .hasUser(user)
+                .then(result=>{
+                  if(result){
+                    socket.broadcast.to(roomToJoin).emit('SAVE');
+                    socket.join(roomToJoin);
+                    socket.handshake.session.can_write = true;
+                    console.log("User join read/write for room", documentId);
+                  } else {
+                    socket.join("VIEWONLY"+documentId);
+                    socket.emit("STOP");
+                    socket.broadcast.to(roomToJoin).emit('SAVE');
+                    console.log("User joined read only for room", documentId);
+                  }
+                });
+            });
         });
-
     });
 
     socket.on('EDIT',function(data){

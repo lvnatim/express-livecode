@@ -1,55 +1,61 @@
 
 $(function(){
 
-  var editor = ace.edit("editor");
-  editor.setOptions({
-    readOnly: true,
-    highlightActiveLine: true,
-    highlightGutterLine: true
-  })
+  // var editor = ace.edit("editor");
+  // editor.setOptions({
+  //   readOnly: true,
+  //   highlightActiveLine: true,
+  //   highlightGutterLine: true
+  // })
 
-  editor.$blockScrolling = Infinity;
-  editor.setTheme("ace/theme/monokai");
-  editor.getSession().setMode("ace/mode/javascript");
+  // editor.$blockScrolling = Infinity;
+  // editor.setTheme("ace/theme/monokai");
+  // editor.getSession().setMode("ace/mode/javascript");
 
-  var Range = ace.require('ace/range').Range;
-  var editSession = editor.getSession();
+  // var Range = ace.require('ace/range').Range;
+  // var editSession = editor.getSession();
 
-  var onlylisten = true;
+  // var onlylisten = true;
 
-  var socket = io.connect('http://localhost:3000')
+  // var socket = io.connect('http://localhost:3000')
 
-  socket.emit('index-view', function(data){
-    console.log(data);
-  });
+  // socket.emit('index-view', function(data){
+  //   console.log(data);
+  // });
 
-    socket.on('EDIT', function(data){
-    var action = data.action;
-    var newText = data.lines.join("\n");
-    var position = data.start;
+  //   socket.on('EDIT', function(data){
+  //   var action = data.action;
+  //   var newText = data.lines.join("\n");
+  //   var position = data.start;
 
-    var startRow = data.start.row
-    var startColumn = data.start.column
-    var endRow = data.end.row
-    var endColumn = data.end.column
-    var removeRange = new Range(startRow,startColumn,endRow,endColumn);
+  //   var startRow = data.start.row
+  //   var startColumn = data.start.column
+  //   var endRow = data.end.row
+  //   var endColumn = data.end.column
+  //   var removeRange = new Range(startRow,startColumn,endRow,endColumn);
 
-    if(action==="insert"){
-      onlylisten = true;
-      console.log(position)
-      editSession.insert(position, newText);
-      onlylisten = false;
-    } else if (action==="remove"){
-      onlylisten = true;
-      editSession.remove(removeRange);
-      onlylisten = false;
-    }
-  });
+  //   if(action==="insert"){
+  //     onlylisten = true;
+  //     console.log(position)
+  //     editSession.insert(position, newText);
+  //     onlylisten = false;
+  //   } else if (action==="remove"){
+  //     onlylisten = true;
+  //     editSession.remove(removeRange);
+  //     onlylisten = false;
+  //   }
+  // });
 
   $('.openRegisterForm').on("click", function(){
     $('.overlay').fadeIn();
     $('.registerForm').animate({top: "150px"}, 500);
   });
+
+   $('.closeRegisterForm').on("click", function(){
+    $('.overlay').fadeOut();
+    $('.registerForm').animate({top: "-1000px"}, 500);
+  });
+
 
   //TODO: Implement client side validation, as well as server-side
 
@@ -88,7 +94,7 @@ $(function(){
     $.post({
       url: '/api/login',
       data: loginData,
-      success: function(){ window.location.href = "/"},
+      success: function(){ window.location.href = "/profile"},
       error: function(){console.log("Invalid username/password.")}
     });
 

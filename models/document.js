@@ -1,13 +1,29 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var Document = sequelize.define('Document', {
-    name: DataTypes.STRING,
-    content: DataTypes.STRING,
-    owned_id: DataTypes.INTEGER,
-    language: DataTypes.STRING
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'untitled'
+    },
+    content: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    language: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      defaultValue: 'javascript'
+    }
   }, {
     classMethods: {
       associate: function(models) {
+        Document.belongsTo(models.User, {as: "Owner"});
         Document.hasMany(models.Comment);
         Document.belongsToMany(models.User, 
           {

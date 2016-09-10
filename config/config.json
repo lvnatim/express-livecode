@@ -3,7 +3,7 @@
     "username": "development",
     "password": "development",
     "database": "expresscode",
-    "host": "127.0.0.1",
+    "host": "localhost",
     "dialect": "postgres",
     "seederStorage": "sequelize"
   },

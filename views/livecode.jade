@@ -1,8 +1,27 @@
 extends layout
 
 block content
+  meta#documentMeta(data-document-id=doc.id)
+  #editor= doc.content
 
-  #editor= content
+  .documentBar
+    table.u-full-width
+      thead
+        th= "Name"
+        th= "Language"
+        th= "Date Created"
+        th= "Last Updated"
+      tbody
+        each val in docs
+          tr.document(data-document-id=val.id)
+            td
+              p.documentTitle(contentEditable="true")= val.name
+            td
+              p.documentLanguage= val.language
+            td
+              p.documentCreatedAt= val.createdAt
+            td
+              p.documentUpdatedAt= val.updatedAt
 
   .commentBar
     .comment.commentTemplate
@@ -21,25 +40,38 @@ block content
       button.hideComments= "cancel"
 
   .sidebar
-    ul.editorList
-      label="Editors"
-      each user in editors
-        li= user.username
-          a.removeUser(data-user-id=user.id)="x"
-    ul.documentButtons
-      li.findUsers
-        input.userSearch(type="text" placeholder="Add an editor!")
-        ul.foundUsers
+    ul
       li
-        label="Language"
-        select.u-full-width
-          option(value="Option 1")="JavaScript"
-          option(value="Option 2")="Ruby"
-          option(value="Option 3")="Python"
+        button.u-full-width.errorMessage= "This is an error message"
+    ul.documentData
+      label="Title"
+        li= doc.name
+      label="Created On"
+        li= doc.createdAt
+      label="Editors"
+        li.editorList
+          each user in doc.Users
+            li= user.firstName + " " + user.lastName+ " " + user.username
+              a.removeUser(data-user-id=user.id)="x"
+        li.findUsers
+          input.userSearch(type="text" placeholder="Add an editor!")
+          ul.foundUsers
+      label="Language"
+        li
+          select.language.u-full-width
+            option(value="csharp")="C#"
+            option(value="c_cpp")="C++"
+            option(value="java")="Java"
+            option(value="javascript")="JavaScript"
+            option(value="php")="PHP"
+            option(value="python")="Python"
+            option(value="ruby")="Ruby"
+            option(value="sql")="SQL"
+    ul.documentButtons
       li
         button.u-full-width.save="Save document"
         button.u-full-width.showComments= "Show comments"
-
+        button.u-full-width.loadDocument= "Load New Document"
 
   script(src="https://cdn.socket.io/socket.io-1.4.5.js")
   script(src="/plugins/ace-builds-master/src/ace.js")
